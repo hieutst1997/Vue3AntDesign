@@ -1,0 +1,75 @@
+{
+	"metadata": {
+		"version": 4.6,
+		"type": "Object",
+		"generator": "Object3D.toJSON"
+	},
+	"geometries": [
+		{
+			"uuid": "6106bf95-9023-4bd2-8b44-2461fc690e4d",
+			"type": "PlaneGeometry",
+			"width": 1,
+			"height": 1,
+			"widthSegments": 1,
+			"heightSegments": 1
+		},
+		{
+			"uuid": "05487d49-d2ec-420d-a400-f756b59a1e01",
+			"type": "BoxGeometry",
+			"width": 1,
+			"height": 1,
+			"depth": 1,
+			"widthSegments": 1,
+			"heightSegments": 1,
+			"depthSegments": 1
+		}],
+	"materials": [
+		{
+			"uuid": "b98ef770-9b83-4ef3-a030-e8d38a27e4e5",
+			"type": "MeshStandardMaterial",
+			"color": 16777215,
+			"roughness": 1,
+			"metalness": 0,
+			"emissive": 16777215,
+			"envMapIntensity": 1,
+			"blendColor": 0
+		},
+		{
+			"uuid": "c5ffb1d1-28ef-4d54-93f7-820c5c45f7f6",
+			"type": "MeshStandardMaterial",
+			"color": 13659501,
+			"roughness": 1,
+			"metalness": 0,
+			"emissive": 2232593,
+			"envMapIntensity": 1,
+			"blendColor": 0
+		}],
+	"object": {
+		"uuid": "5FC9ACA9-2A93-474D-AA32-FACC76551914",
+		"type": "Scene",
+		"name": "Scene",
+		"layers": 1,
+		"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+		"up": [0,1,0],
+		"children": [
+			{
+				"uuid": "0775f6b5-87a3-4493-8158-c266b0ef162d",
+				"type": "Mesh",
+				"name": "Plane",
+				"layers": 1,
+				"matrix": [80.6836092474792,0,0,0,0,-1.3657080414371496,-104.6782946193976,0,0,0.9999149024569282,-0.013045606331316906,0,0.07268252340531944,3.422267906720313,0,1],
+				"up": [0,1,0],
+				"geometry": "6106bf95-9023-4bd2-8b44-2461fc690e4d",
+				"material": "b98ef770-9b83-4ef3-a030-e8d38a27e4e5"
+			},
+			{
+				"uuid": "cac9f936-2c76-4dff-94d1-f7239bb37311",
+				"type": "Mesh",
+				"layers": 1,
+				"matrix": [32.519711514113744,0,0,0,0,30.287466263012117,0,0,0,0,35.93701887953569,0,12.14691313645757,27.022167500543283,0,1],
+				"up": [0,1,0],
+				"geometry": "05487d49-d2ec-420d-a400-f756b59a1e01",
+				"material": "c5ffb1d1-28ef-4d54-93f7-820c5c45f7f6"
+			}]
+	}
+}

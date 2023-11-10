@@ -1,0 +1,44 @@
+{
+  "name": "my-project",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "lint": "cls & eslint --ext .ts,.js,.vue src",
+    "fix": "cls & eslint --ext .ts,.js,.vue src --fix",
+    "dev": "cls & vite --mode dev",
+    "production": "vite build --mode production",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@vuepic/vue-datepicker": "^7.2.0",
+    "ant-design-vue": "^4.0.6",
+    "axios": "^1.6.0",
+    "chart.js": "^4.4.0",
+    "dayjs": "^1.11.10",
+    "eslint-plugin-vue": "^9.18.1",
+    "three": "^0.158.0",
+    "vee-validate": "^4.11.8",
+    "vue": "^3.3.4",
+    "vue-barcode-reader": "^1.0.3",
+    "vue-chartjs": "^5.2.0",
+    "vue-router": "4",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.2.3",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.52.0",
+    "node-sass": "^9.0.0",
+    "postcss": "^8.4.31",
+    "sass": "^1.69.5",
+    "sass-loader": "^13.3.2",
+    "tailwindcss": "^3.3.5",
+    "vite": "^4.4.5"
+  },
+  "resolutions": {
+    "vite": "^4.0.0",
+    "@vitejs/plugin-vue": "^4.0.0"
+  }
+}

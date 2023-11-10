@@ -1,0 +1,21 @@
+{
+  "app": {
+    "title": "ZALOAPPDEMO",
+    "headerTitle": "ZALOAPPDEMO",
+    "headerColor": "#ff7868",
+    "textColor": "white",
+    "statusBarColor": "#ff7868",
+    "leftButton": "back",
+    "statusBar": "normal",
+    "actionBarHidden": false,
+    "hideAndroidBottomNavigationBar": false,
+    "hideIOSSafeAreaBottom": false,
+    "textAlign": "center",
+    "selfControlLoading": false
+  },
+  "debug": false,
+  "listCSS": [],
+  "listSyncJS": [],
+  "listAsyncJS": [],
+  "template": {}
+}
