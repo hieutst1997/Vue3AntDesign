@@ -6,13 +6,6 @@ import { fileURLToPath, URL } from 'node:url'
 export default defineConfig({
   plugins: [
     vue(),
-    {
-      apply: 'build',
-      enforce: 'pre',
-      resolveId(id) {
-        if (id.includes('vite/preload-helper')) return 'vite/preload-helper';
-      },
-    },
   ],
   base: "./",
   resolve: {
