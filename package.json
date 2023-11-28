@@ -12,6 +12,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@theatre/core": "^0.7.0",
+    "@theatre/studio": "^0.7.0",
     "@vuepic/vue-datepicker": "^7.2.0",
     "ant-design-vue": "^4.0.6",
     "axios": "^1.6.0",

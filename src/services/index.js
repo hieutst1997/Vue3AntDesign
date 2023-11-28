@@ -1,5 +1,5 @@
-import ZALO from './zaloController';
+import OBJECT from './3DObject';
 
 export default {
-    ZALO
+    OBJECT
 }

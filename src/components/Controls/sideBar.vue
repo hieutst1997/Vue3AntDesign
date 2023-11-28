@@ -21,7 +21,8 @@ export default defineComponent({
 			mode: 'inline', // or 'vertical' for a vertical sidebar
 			menuItems: [
 				{ key: '1', title: 'Home', to: '/' },
-				{ key: '2', title: 'About', to: '/ThreeJS' },
+				{ key: '2', title: 'Solution 1 - Basic Three', to: '/ThreeJS' },
+				{ key: '3', title: 'Solution 2 - Andvance Theatre', to: '/3DEdit' },
 				// Add more menu items with corresponding routes
 			],
 		};

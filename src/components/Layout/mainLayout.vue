@@ -6,14 +6,7 @@
 			</div>
 			<div class="flex-col-10">
 				<div class="relative h-screen overflow-auto">
-					<div>
-						<a-page-header
-							style="border: 1px solid rgb(235, 237, 240)"
-							title="Title"
-							sub-title="This is a subtitle"
-							@back="() => null"
-						/>
-					</div>
+					
                     <div class = "mt-2">
                         <Loading v-if="store.getters.getLoading" />
 					    <router-view></router-view>
@@ -29,6 +22,7 @@ import { defineComponent } from "vue";
 import SideBar from "@/components/Controls/sideBar.vue";
 import Loading from "@/components/Loading/loadingStyleOne.vue";
 import { useStore } from "vuex";
+import { useRouter, useRoute } from 'vue-router';
 export default defineComponent({
 	components: {
 		SideBar,
@@ -37,9 +31,15 @@ export default defineComponent({
 	name: "mainLayout",
 	setup() {
 		const store = useStore();
+		const router = useRouter();
+
+		function back() {
+			router.back()
+		}
 
 		return {
 			store,
+			back
 		};
 	},
 });

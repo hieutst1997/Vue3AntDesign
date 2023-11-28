@@ -1,10 +1,10 @@
 import axios from 'axios'
 import configApp from '../config'
-import router from '@/router'
-import constants from '@/constants'
+// import router from '@/router'
+// import constants from '@/constants'
 
-const config = configApp(import.meta.env.MODE)
-const backEndURL = `${config.SERVER.DOMAIN}`
+// const config = configApp(import.meta.env.MODE)
+const backEndURL = `https://hieutst1997.github.io/Json3D`
 
 axios.interceptors.response.use(
     async (response) => {
@@ -31,6 +31,7 @@ const get = async ({ fullUrl = null, headers = null, endPoint = null, params = {
         return await axios({
             url: fullUrl || backEndURL + endPoint,
             method: 'GET',
+            mode: 'no-cors',
             headers: headers || {
                 'accept': '*/*',
                 'Access-Control-Allow-Origin': '*',

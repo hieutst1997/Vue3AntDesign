@@ -1,0 +1,48 @@
+{
+	"metadata": {
+		"version": 4.6,
+		"type": "Object",
+		"generator": "Object3D.toJSON"
+	},
+	"geometries": [
+		{
+			"uuid": "bdc330bb-6a3a-4fc7-b82a-2c4090bbd04f",
+			"type": "BoxGeometry",
+			"width": 1,
+			"height": 1,
+			"depth": 1,
+			"widthSegments": 1,
+			"heightSegments": 1,
+			"depthSegments": 1
+		}],
+	"materials": [
+		{
+			"uuid": "e8852ffb-2421-4526-a1b8-b88cc646cec9",
+			"type": "MeshStandardMaterial",
+			"color": 16777215,
+			"roughness": 1,
+			"metalness": 0,
+			"emissive": 0,
+			"envMapIntensity": 1,
+			"blendColor": 0
+		}],
+	"object": {
+		"uuid": "f648e198-121e-4457-97ad-6e44dcffbafd",
+		"type": "Scene",
+		"name": "Scene",
+		"layers": 1,
+		"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+		"up": [0,1,0],
+		"children": [
+			{
+				"uuid": "ccd723a3-a5ca-4238-87d7-fd58c86af404",
+				"type": "Mesh",
+				"name": "Box",
+				"layers": 1,
+				"matrix": [11.809184125449413,0,0,0,0,7.691312226496352,0,0,0,0,16.986353735168557,0,0,5.384019429908497,0,1],
+				"up": [0,1,0],
+				"geometry": "bdc330bb-6a3a-4fc7-b82a-2c4090bbd04f",
+				"material": "e8852ffb-2421-4526-a1b8-b88cc646cec9"
+			}]
+	}
+}

@@ -1,119 +1,188 @@
 <template>
-  <div id = "sceneContainer" ref="sceneContainer"></div>
+	<div>
+		<div>
+			<div
+				class="p-3 flex items-center rounded-lg mx-3"
+				style="border: 1px solid #dee1e6"
+			>
+				<label class="block">
+					<span class="sr-only">Choose File</span>
+					<input
+						type="file"
+						class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+						accept=".json, .glb, .gltf"
+						@change="handleInput($event)"
+					/>
+				</label>
+			</div>
+
+			<div class="mt-2 relative">
+				<Loading v-if="loading" />
+				<div id="sceneContainer" ref="sceneContainer"></div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-
+import loadingStyleOne from "@/components/Loading/loadingStyleOne.vue";
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 export default {
-  mounted() {
-    const container = this.$refs.sceneContainer;
-    const scene = new THREE.Scene();
+	data() {
+		return {
+			stateJson: null,
+			loading: false,
+		};
+	},
 
-    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-    camera.position.set(100, 100, -5);
-    camera.lookAt(0, 0, 0); // Look at the center (0, 0, 0)
+	components: {
+		Loading: loadingStyleOne,
+	},
 
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    container.appendChild(renderer.domElement);
+	async mounted() {
+		await this.fetchData();
+	},
+	methods: {
+		animate(scene, camera, renderer, controls) {
+			const animate = () => {
+				requestAnimationFrame(animate);
 
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.25;
-    controls.screenSpacePanning = false;
-    let hoverMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 }); // Replace with your desired hover material
+				// Ensure controls are updated in the animation loop
+				controls.update();
 
-    let selectedObject = null;
-    const loader = new THREE.ObjectLoader();
+				// Render the scene
+				renderer.render(scene, camera);
+			};
+			animate();
+		},
 
-    // Replace 'path/to/your/exported-scene.json' with the actual path to your exported JSON file.
-    loader.load(
-      '/scene.json',
-      (loadedScene) => {
-        scene.copy(loadedScene); // Copy the loaded scene into your main scene
+		async loadObject(jsonFile) {
+			const container = this.$refs.sceneContainer;
+			const scene = new THREE.Scene();
 
-        // Optional: Adjust camera position based on the loaded scene
-        const boundingBox = new THREE.Box3().setFromObject(loadedScene);
-        const center = new THREE.Vector3();
-        boundingBox.getCenter(center);
-        camera.lookAt(center);
+			const camera = new THREE.PerspectiveCamera(
+				75,
+				container.clientWidth / container.clientHeight,
+				0.1,
+				1000
+			);
+			camera.position.set(100, 100, -5);
+			camera.lookAt(0, 0, 0);
 
-        // Optional: Set camera position based on bounding box
-        const size = boundingBox.getSize(new THREE.Vector3());
-        const maxDim = Math.max(size.x, size.y, size.z);
-        const fov = camera.fov * (Math.PI / 180);
-        const cameraDistance = maxDim / (2 * Math.tan(fov / 2));
-        camera.position.z = cameraDistance * 1.5;
+			const renderer = new THREE.WebGLRenderer();
+			renderer.setSize(container.clientWidth, container.clientHeight);
+			
 
-        this.animate(scene, camera, renderer, controls);
-      },
-      undefined,
-      (error) => {
-        console.error('Error loading exported scene', error);
-      }
-    );
-  },
-  methods: {
-    animate(scene, camera, renderer, controls) {
-      const animate = () => {
-        requestAnimationFrame(animate);
+			const controls = new OrbitControls(camera, renderer.domElement);
+			controls.enableDamping = true;
+			controls.dampingFactor = 0.25;
+			controls.screenSpacePanning = false;
 
-        // Ensure controls are updated in the animation loop
-        controls.update();
+			// Optional: Initial loading of the scene
+			await this.updateScene(jsonFile, scene, camera, controls, renderer, container);
+		
+		},
 
-        // Render the scene
-        renderer.render(scene, camera);
-      };
-      animate();
-    },
-    setupHoverEvents(scene, renderer, camera) {
-      const raycaster = new THREE.Raycaster();
-      const mouse = new THREE.Vector2();
-      const hoveredObjects = [];
+		async updateScene(jsonFile, scene, camera, controls, renderer, container) {
+			if (jsonFile) {
+				const loader = new THREE.ObjectLoader();
+				const loadedScene = loader.parse(JSON.parse(jsonFile));
+				
+				container.appendChild(renderer.domElement);
 
-      window.addEventListener('mousemove', (event) => {
-        // Calculate normalized device coordinates
-        mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
-        mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
+				// Copy the loaded scene into your main scene
+				scene.copy(loadedScene);
 
-        // Update the picking ray with the camera and mouse position
-        raycaster.setFromCamera(mouse, camera);
+				// Optional: Adjust camera position based on the loaded scene
+				const boundingBox = new THREE.Box3().setFromObject(loadedScene);
+				const center = new THREE.Vector3();
+				boundingBox.getCenter(center);
+				camera.lookAt(center);
 
-        // Check for intersections
-        const intersects = raycaster.intersectObjects(hoveredObjects);
+				// Optional: Set camera position based on bounding box
+				const size = boundingBox.getSize(new THREE.Vector3());
+				const maxDim = Math.max(size.x, size.y, size.z);
+				const fov = camera.fov * (Math.PI / 180);
+				const cameraDistance = maxDim / (2 * Math.tan(fov / 2));
+				camera.position.z = cameraDistance * 1.5;
 
-        // Handle hover effect
-        hoveredObjects.forEach((object) => {
-          if (object.userData.originalMaterial && object.material) {
-            object.material.copy(object.userData.originalMaterial);
-          }
-        });
+				this.animate(scene, camera, renderer, controls);
+			} else {
+				console.error("JSON data not found or invalid");
+			}
+		},
 
-        if (intersects.length > 0) {
-          const hoveredObject = intersects[0].object;
+		async fetchData() {
+			let dataFake = null;
+			this.loading = true;
+			await fetch("https://hieutst1997.github.io/Json3D/demo2.json")
+				.then((response) => response.json())
+				.then((data) => {
+					dataFake = JSON.stringify(data);
+				})
+				.catch((error) => console.error(error));
 
-          if (hoveredObject.userData.hoverable) {
-            hoveredObject.material.copy(hoverMaterial);
-          }
+			this.loading = false;
 
-          selectedObject = hoveredObject;
-        } else {
-          selectedObject = null;
-        }
-      });
-    },
-  },
+			this.stateJson = dataFake;
+		},
+
+		async handleInput(event) {
+			const input = event.target;
+
+			if (!input.files || input.files.length === 0) {
+				console.error("No file selected");
+				return;
+			}
+
+			const file = input.files[0];
+			try {
+				const jsonData = await this.readFileAsync(file);
+				if (jsonData) {
+					this.stateJson = jsonData;
+				}
+			} catch (error) {
+				console.error("Error reading or parsing JSON file:", error);
+			}
+		},
+
+		readFileAsync(file) {
+			return new Promise((resolve, reject) => {
+				const reader = new FileReader();
+				reader.onload = (e) => resolve(e.target.result);
+				reader.onerror = (e) =>
+					reject(new Error("Error reading file", e));
+				reader.readAsText(file);
+			});
+		},
+	},
+
+	watch: {
+		stateJson(newValue) {
+			if (newValue) {
+				const container = this.$refs.sceneContainer;
+				const canvasElement = document.querySelector("canvas");
+				if(canvasElement){
+					container.removeChild(canvasElement);
+				}
+				this.loading = true;
+				this.loadObject(newValue);
+				this.loading = false;
+				
+				console.log('change')
+			}
+		},
+	},
 };
 </script>
 
 <style>
 #sceneContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 81px);
-  width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: calc(100vh - 81px);
+	width: 100%;
 }
 </style>

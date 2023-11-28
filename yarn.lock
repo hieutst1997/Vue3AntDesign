@@ -345,6 +345,27 @@
     core-js "^3.15.1"
     nanopop "^2.1.0"
 
+"@theatre/core@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@theatre/core/-/core-0.7.0.tgz#1bcc074056cf2536f2818b0ad3a59fba97142d32"
+  integrity sha512-CXRUxOaKQtb4biQa6+I6PW8wPsFj9NsZgr7VdosSB20WxlanQ8/ZR0xH/A3A3oCHdCXKaZxQlNcEOeByk4Yf/g==
+  dependencies:
+    "@theatre/dataverse" "0.7.0"
+
+"@theatre/dataverse@0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@theatre/dataverse/-/dataverse-0.7.0.tgz#d8c75342ae5fd15a88b32b5a000c31fd40facf16"
+  integrity sha512-NbhTZYOqETp9g0II7R9GypErnZ47TmoT6yzyQ0vGfgVLD1a+dsPG+CLvvyzssbGG/gfDDoMzkXNwWJAwNkqFvQ==
+  dependencies:
+    lodash-es "^4.17.21"
+
+"@theatre/studio@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@theatre/studio/-/studio-0.7.0.tgz#d5ea0bb6be6941eadb6347851371db51379df3fe"
+  integrity sha512-aBkDUBmvajWaha5dd/6Fs7sHCDMQKqVlLX9SDGsMJkKoCEb9dzwD5F5FOZCWt+OhbbwIbP9dYR6S4n6abyDkBQ==
+  dependencies:
+    "@theatre/dataverse" "0.7.0"
+
 "@tootallnate/once@1":
   version "1.1.2"
   resolved "https://registry.npmjs.org/@tootallnate/once/-/once-1.1.2.tgz"
@@ -1708,7 +1729,7 @@ locate-path@^6.0.0:
   dependencies:
     p-locate "^5.0.0"
 
-lodash-es@^4.17.15:
+lodash-es@^4.17.15, lodash-es@^4.17.21:
   version "4.17.21"
   resolved "https://registry.npmjs.org/lodash-es/-/lodash-es-4.17.21.tgz"
   integrity sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==
